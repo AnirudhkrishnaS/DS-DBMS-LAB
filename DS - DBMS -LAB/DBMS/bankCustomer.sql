@@ -1,0 +1,45 @@
+-> create table bank_customer
+(accno varchar(5) primary key ,
+ cname varchar(20) , place varchar(20)
+ );
+
+  insert into bank_customer values
+ (103 , 'arjun' , 'mankada'),
+ (101 , 'swetha' , 'kozhikode'),
+  (102 , 'roy' , 'malappuram'),
+   (104 ,'rakesh' , 'thrissur');
+
+
+->create table deposit
+(
+accno varchar(5) ,
+deposit_no varchar(5) ,
+damount int ,
+foreign key(accno) references bank_customer(accno)
+);
+
+-> insert into deposit values
+(103 , 543 , 25000),
+(104 , 345 , 30000),
+(104 , 567 , 45000),
+(101 , 678 , 50000);
+
+->  create table loan
+(accno varchar(5) ,
+loan_no varchar(5) ,
+lamount int ,
+foreign key(accno) references bank_customer(accno));
+
+ insert into loan values(101 , 456 , 37000);
+insert into loan values(102 , 509 , 45000);
+insert into loan values(103 , 236 , 15000);
+
+-> select cname , damount from bank_customer , deposit where bank_customer.accno = deposit.accno;
+
+-> select cname lamount from bank_customer , loan where bank_customer.accno = loan.accno;
+
+-> select cname from bank_customer , deposit , loan
+where bank_customer.accno = loan.accno and bank_customer.accno = deposit.accno;
+
+ -> select * from bank_customer where accno not in (select accno from deposit union select accno from loan);
+
