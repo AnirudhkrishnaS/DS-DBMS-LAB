@@ -1,4 +1,4 @@
--> create table bank_customer
+-create table bank_customer
 (accno varchar(5) primary key ,
  cname varchar(20) , place varchar(20)
  );
@@ -10,7 +10,7 @@
    (104 ,'rakesh' , 'thrissur');
 
 
-->create table deposit
+create table deposit
 (
 accno varchar(5) ,
 deposit_no varchar(5) ,
@@ -30,16 +30,26 @@ loan_no varchar(5) ,
 lamount int ,
 foreign key(accno) references bank_customer(accno));
 
- insert into loan values(101 , 456 , 37000);
+
+insert into loan values(101 , 456 , 37000);
 insert into loan values(102 , 509 , 45000);
 insert into loan values(103 , 236 , 15000);
 
--> select cname , damount from bank_customer , deposit where bank_customer.accno = deposit.accno;
 
--> select cname lamount from bank_customer , loan where bank_customer.accno = loan.accno;
 
--> select cname from bank_customer , deposit , loan
+-->b) Display the customers along with deposit amount who have only deposit with the bank
+select cname , damount from bank_customer , deposit where bank_customer.accno = deposit.accno;
+
+
+-->c) Display the customers along with loan amount who have only loan with the bank
+select cname lamount from bank_customer , loan where bank_customer.accno = loan.accno;
+
+
+-->d) Display the customers they have both loan and deposit with the bank
+select cname from bank_customer , deposit , loan
 where bank_customer.accno = loan.accno and bank_customer.accno = deposit.accno;
 
- -> select * from bank_customer where accno not in (select accno from deposit union select accno from loan);
+
+-->e) Display the customer who have neither a loan nor a deposit with the bank
+select * from bank_customer where accno not in (select accno from deposit union select accno from loan);
 
