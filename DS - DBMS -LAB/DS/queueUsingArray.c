@@ -63,7 +63,6 @@ if(rear == n-1){
 
 void delete(){
 if(front == -1 && rear == -1){
-    printf("The deleted element is : %d\n",queue[front]);
     printf("under flow ..\n");
 }
 else if(front == rear){
